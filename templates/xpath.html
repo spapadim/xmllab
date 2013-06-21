@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+
+<xi:include href="layout.html"/>
+
+<head>
+<title>XPath</title>
+<link rel="stylesheet" media="screen" href="css/xml.css"/>
+</head>
+
+<body>
+
+<h1>XPath &rsaquo; xmlLAB</h1>
+<p>
+<form action="xpath" method="post">
+<py:choose>
+<py:when test="xpath">
+<input type="text" class="input-block-level input-xml" name="xpath" placeholder="XPath expression" value="${xpath}" />
+</py:when>
+<py:otherwise>
+<input type="text" class="input-block-level" name="xpath" placeholder="XPath expression" />
+</py:otherwise>
+</py:choose>
+<button type="submit" class="btn btn-primary">Evaluate</button>
+</form>
+</p>
+
+
+
+<py:if test="exc">
+<hr/>
+<h3 class="text-error">Error</h3>
+<div class="span12 error">
+<p>Error evaluating XPath expression:</p>
+<?python import traceback ?>
+<pre>
+${''.join(traceback.format_exception_only(*(exc[0:2]))).rstrip()}
+</pre>
+<hr/>
+<p>Details:</p>
+<pre>
+${''.join(traceback.format_tb(exc[2])).rstrip()}
+</pre>
+</div>
+</py:if>
+
+
+<py:if test="xpath">
+  <py:if test="len(elts) == 0">
+    <hr/>
+    <h3>No results</h3>
+  </py:if>
+</py:if>
+
+<py:if test="len(elts) > 0">
+<hr/>
+<h3>Results</h3>
+<?python from lxml import etree ?>
+</py:if>
+
+<div class="span12 xml" py:for="elt in elts">
+<pre>
+  ${etree.tostring(elt, pretty_print = True).rstrip() if type(elt) == etree._Element else str(elt).rstrip()}
+</pre>
+</div>
+
+</body>
+
+</html>

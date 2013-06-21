@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+
+<xi:include href="layout.html"/>
+
+<head>
+<title>Scores</title>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Scoreboard &rsaquo; xmlLAB</h1>
+
+<div class="span6">
+  <table class="table table-striped">
+    <thead><tr><th>Screename</th><th>Score</th><th>Bonus</th></tr></thead>
+    <tbody>
+      <tr py:for="row in scores">
+        <td>${row['username']}</td><td>${row['score']}</td><td>${row['bonus']}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</div><!-- container -->
+
+</body>
+
+</html>

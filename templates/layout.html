@@ -1,0 +1,78 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/" py:strip="">
+
+<!--! ################################################################## -->
+<!--! ## HTML header                                                     -->
+<!--! ################################################################## -->
+<py:match path="head" once="true">
+<head py:attrs="select('@*')">
+<title py:with="title = list(select('title/text()'))">
+<py:if test="title">${title} &rsaquo; </py:if>xmlLAB &rsaquo; BDM@RBS
+</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" media="screen" href="css/bootstrap.min.css"/>
+<style type="text/css">
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+</style>
+<link rel="stylesheet" media="screen" href="css/bootstrap-responsive.min.css"/>
+${select('*[local-name()!="title"]')}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+</head>
+</py:match><!--! head -->
+
+<!--! ################################################################## -->
+<!--! ## HTML body                                                       -->
+<!--! ################################################################## -->
+<py:match path="body" once="true">
+<body py:attrs="select('@*')">
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container">
+      <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="brand" href="/xml">xmlLAB</a>
+      <div class="nav-collapse collapse">
+        <ul class="nav">
+          <li><a href="xpath">XPath</a></li>
+          <li><a href="xslt">XSLT</a></li>
+          <li><a href="test">Test</a></li>
+          <li><a href="scores">Scores</a></li>
+        </ul>
+        <ul class="nav pull-right">
+<?python import cherrypy ?>
+          <li><a href="logout">Logout ${cherrypy.request.username}</a></li>
+        </ul>
+      </div><!--/.nav-collapse -->
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+${select('*|text()')}
+
+<hr/>
+
+<footer>
+<p>
+&copy; Spiros Papadimitriou, 2013
+<span style="display: block; float: right"><a href="mailto:spapadim@gmail.com?subject=xmlLAB+bug+report">Report a bug</a></span>
+</p>
+</footer>
+
+</div>
+
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-filestyle.min.js"></script>
+</body>
+</py:match><!--! body -->
+
+</html>

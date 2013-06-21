@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+
+<xi:include href="layout.html"/>
+
+<head>
+<style type="text/css">
+.banner {
+  background-image: url("img/flower-tree.jpg");
+  background-size: cover;
+  background-position: 0px -220px;
+  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+.banner h1 {
+  color: #f5f5f5;
+  text-shadow: -1px -1px 2px rgba(0, 0, 0, 0.80);
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero-unit banner">
+  <h1>xmlLAB &rsaquo; BDM@RBS</h1>
+  <p></p>
+</div><!-- hero -->
+
+<div class="row">
+  <div class="span5">
+    <h3>Dataset</h3>
+    <p>This site provides access to an XML representation of the IMDB dataset
+    that was used for the second homework assignment.  The root element is
+    <code>imdb</code>, and it contains a sequence of <code>movie</code>
+    elements such as <a href="xpath?xpath=/imdb/movie%5B1%5D">this</a>.</p>
+  </div>
+  <div class="span3">
+    <h3>XML data management</h3>
+    <p>This site allows you to perform XPath queries and XSLT transformations
+    on the data.</p>
+  </div>
+  <div class="offset1 span3">
+    <p><a href="data/imdb.xml.gz" class="btn btn-large btn-block btn-success" style="font-size: 24.5px; padding: 24px 12px; margin-top: 18px;">Download data</a></p>
+  </div>
+</div><!-- row -->
+
+</body>
+
+</html>

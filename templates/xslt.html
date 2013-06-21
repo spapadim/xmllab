@@ -1,0 +1,68 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/" py:strip="">
+
+<xi:include href="layout.html"/>
+
+<head>
+<title>XSLT</title>
+<link rel="stylesheet" media="screen" href="css/xml.css"/>
+<style type="text/css">
+.margin-fix {
+  margin-top: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>XSLT &rsaquo; xmlLAB</h1>
+<p>
+<form action="xslt" method="post" enctype="multipart/form-data">
+<textarea class="input-block-level input-xml" name="xslt_s" rows="8" placeholder="Type an XSLT spec here, or choose file to upload below">
+<py:if test="xslt_s">${xslt_s.rstrip()}</py:if>
+</textarea>
+<div class="file-input"><input type="file" name="xslt_f"/></div>
+<script>
+$(document).ready(function() {
+  $(':file').filestyle({icon: true, classIcon: 'icon-arrow-up', buttonText: 'Choose XSLT file', classText: 'span5'});
+});
+</script>
+<button type="submit" class="btn btn-primary" style="margin-top: 10px">Transform</button>
+</form>
+</p>
+
+
+<py:if test="exc">
+<hr/>
+<h3 class="text-error">Error</h3>
+<div class="span12 error">
+<p>XSLT error:</p>
+<?python import traceback ?>
+<pre>
+${''.join(traceback.format_exception_only(*(exc[0:2]))).rstrip()}
+</pre>
+<hr/>
+<p>Details:</p>
+<pre>
+${''.join(traceback.format_tb(exc[2])).rstrip()}
+</pre>
+</div>
+</py:if>
+
+
+<py:if test="doc">
+<hr/>
+<h3>Result</h3>
+<?python from lxml import etree ?>
+
+<div class="span12 xml">
+<pre>
+${etree.tostring(doc, pretty_print=True).rstrip()}
+</pre>
+</div>
+</py:if>
+
+
+</body>
+</html>

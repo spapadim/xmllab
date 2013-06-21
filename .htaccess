@@ -1,0 +1,9 @@
+#SetHandler mod_python
+#PythonHandler mod_python.publisher
+
+PythonPath "sys.path+['/var/www/xml']"
+SetHandler python-program
+PythonHandler cherrypy._cpmodpy::handler
+PythonOption cherrypy.setup xmlapp::start_modpython
+PythonDebug On
+

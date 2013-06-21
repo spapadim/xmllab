@@ -1,0 +1,44 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+
+<head>
+<meta charset="utf-8"/>
+<title>Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="stylesheet" media="screen" href="css/bootstrap.min.css"/>
+<style type="text/css">
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+</style>
+<link rel="stylesheet" href="css/forms.css"/>
+<link rel="stylesheet" media="screen" href="css/bootstrap-responsive.min.css"/>
+</head>
+
+<body>
+
+<div class="container">
+
+  <form class="form-signin" action="login" method="post">
+    <h2 class="form-signin-heading">Please log in</h2>
+<py:choose>
+<py:when test="username">
+    <p class="text-error">Invalid username/password combination</p>
+    <input type="text" class="input-block-level" placeholder="Username" name="username" value="${username}"/>
+</py:when>
+<py:otherwise>
+    <input type="text" class="input-block-level" placeholder="Username" name="username"/>
+</py:otherwise>
+</py:choose>
+    <input type="password" class="input-block-level" placeholder="Password" name="password"/>
+    <button class="btn btn-large btn-primary" type="submit">Login</button>
+  </form>
+
+</div> <!-- /container -->
+
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/">
+
+<xi:include href="layout.html"/>
+
+<head>
+<title>Test</title>
+<link rel="stylesheet" media="screen" href="css/test.css"/>
+</head>
+
+<body>
+
+<div class="container">
+<h1>Test HW5 &rsaquo; xmlLAB</h1>
+<p>
+<form action="test" method="post" enctype="multipart/form-data">
+<div class="file-input" style="margin: 0 0 10px 0"><input type="file" name="zip_f"/></div>
+<script>
+$(document).ready(function() {
+  $(':file').filestyle({icon: true, classIcon: 'icon-arrow-up', buttonText: 'Choose ZIP file', classText: 'span4'});
+});
+</script>
+<button type="submit" class="btn btn-primary" style="margin-left: 0">Run tests</button>
+</form>
+</p>
+</div><!-- container -->
+
+<py:if test="results">
+<hr/>
+<h1>Results</h1>
+</py:if>
+
+<div class="accordion span12" id="results">
+<py:for each="i, res in enumerate(results)">
+  <div class="accordion-group test">
+    <div class="accordion-heading ${'pass' if res[0] else 'fail'}">
+      <a class="accordion-toggle" data-toggle="collapse" data-parent="#results" href="#res${i}">
+        <div class="num">Q${i+1}</div>
+        <span class="status">${'PASSED' if res[0] else 'FAILED'}</span>
+      </a><!-- accordion-toggle -->
+    </div><!-- accordion-heading -->
+    <div class="accordion-body collapse" id="res${i}">
+      <div class="accordion-inner">
+        ${Markup(res[1])}
+      </div><!-- accordion-inner -->
+     </div><!-- accordion-body -->
+  </div><!-- accordion-group -->
+</py:for>
+</div><!-- accordion -->
+
+</body>
+
+</html>
